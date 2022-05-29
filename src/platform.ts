@@ -11,11 +11,11 @@ import createFakeGatoHistory from "fakegato-history";
 
 import { PLATFORM_NAME, PLUGIN_NAME } from "./settings";
 import {
-  ThermobeaconWs08Accessory,
-  ThermobeaconWs08SensorConfig,
+  ThermobeaconOriaAccessory,
+  ThermobeaconOriaSensorConfig,
 } from "./platformAccessory";
 
-export class ThermobeaconWs08Platform implements DynamicPlatformPlugin {
+export class ThermobeaconOriaPlatform implements DynamicPlatformPlugin {
   public readonly Service: typeof Service = this.api.hap.Service;
   public readonly Characteristic: typeof Characteristic =
     this.api.hap.Characteristic;
@@ -44,14 +44,14 @@ export class ThermobeaconWs08Platform implements DynamicPlatformPlugin {
   }
 
   discoverDevices() {
-    const devices: ThermobeaconWs08SensorConfig[] = this.config.sensors;
+    const devices: ThermobeaconOriaSensorConfig[] = this.config.sensors;
 
     for (const device of devices) {
       const uuid = this.api.hap.uuid.generate(device.macAddress);
 
       const existingAccessory = this.accessories.find(
         (accessory) => accessory.UUID === uuid
-      ) as PlatformAccessory<ThermobeaconWs08SensorConfig>;
+      ) as PlatformAccessory<ThermobeaconOriaSensorConfig>;
 
       if (existingAccessory) {
         this.log.info(
@@ -59,18 +59,18 @@ export class ThermobeaconWs08Platform implements DynamicPlatformPlugin {
           existingAccessory.displayName
         );
 
-        new ThermobeaconWs08Accessory(this, existingAccessory);
+        new ThermobeaconOriaAccessory(this, existingAccessory);
       } else {
         this.log.info("Adding new accessory:", device.name);
 
         const accessory = new this.api.platformAccessory(
           device.name,
           uuid
-        ) as PlatformAccessory<ThermobeaconWs08SensorConfig>;
+        ) as PlatformAccessory<ThermobeaconOriaSensorConfig>;
 
         accessory.context = device;
 
-        new ThermobeaconWs08Accessory(this, accessory);
+        new ThermobeaconOriaAccessory(this, accessory);
 
         this.api.registerPlatformAccessories(PLUGIN_NAME, PLATFORM_NAME, [
           accessory,

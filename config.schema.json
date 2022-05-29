@@ -1,5 +1,5 @@
 {
-  "pluginAlias": "ThermobeaconWs08",
+  "pluginAlias": "ThermobeaconOria",
   "pluginType": "platform",
   "singular": true,
   "schema": {

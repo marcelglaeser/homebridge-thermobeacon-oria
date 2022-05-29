@@ -1,15 +1,15 @@
 {
-  "displayName": "ThermoBeacon ws08",
-  "name": "homebridge-thermobeacon-ws08",
-  "version": "1.16.0",
-  "description": "Plugin for ThermoBeacon ws08 temperature and humidity sensor",
+  "displayName": "ThermoBeacon ORIA",
+  "name": "homebridge-thermobeacon-oria",
+  "version": "1.1.0",
+  "description": "Plugin for ThermoBeacon ORIA temperature and humidity sensor",
   "license": "Apache-2.0",
   "repository": {
     "type": "git",
-    "url": "git://github.com/thomas-lebeau/homebridge-thermobeacon-ws08.git"
+    "url": "git://github.com/marcelglaeser/homebridge-thermobeacon-oria.git"
   },
   "bugs": {
-    "url": "https://github.com/thomas-lebeau/homebridge-thermobeacon-ws08/issues"
+    "url": "https://github.com/marcelglaeser/homebridge-thermobeacon-oria/issues"
   },
   "engines": {
     "node": ">=14.18.1",

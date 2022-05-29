@@ -1,30 +1,30 @@
 import { FakeGatoHistoryService } from "fakegato-history";
 import { Service, PlatformAccessory } from "homebridge";
 
-import { ThermobeaconWs08Platform } from "./platform";
-import { read, ThermoBeaconWs08Reading } from "./thermobeacon-ws08";
+import { ThermobeaconOriaPlatform } from "./platform";
+import { read, ThermoBeaconOriaReading } from "./thermobeacon-oria";
 
 const LOW_BATTERY = 10; // 10%
 const UPDATE_INTERVAL = 1000 * 60; // 1 minute
 
-export interface ThermobeaconWs08SensorConfig {
+export interface ThermobeaconOriaSensorConfig {
   name: string;
   macAddress: string;
 }
 
-export interface ThermobeaconWs08Config {
-  sensors: ThermobeaconWs08SensorConfig[];
+export interface ThermobeaconOriaConfig {
+  sensors: ThermobeaconOriaSensorConfig[];
 }
 
-export class ThermobeaconWs08Accessory {
+export class ThermobeaconOriaAccessory {
   private thermometer: Service;
   private history: FakeGatoHistoryService;
   private hygrometer: Service;
   private battery: Service;
 
   constructor(
-    private readonly platform: ThermobeaconWs08Platform,
-    private readonly accessory: PlatformAccessory<ThermobeaconWs08SensorConfig>
+    private readonly platform: ThermobeaconOriaPlatform,
+    private readonly accessory: PlatformAccessory<ThermobeaconOriaSensorConfig>
   ) {
     this.accessory
       .getService(this.platform.Service.AccessoryInformation)
@@ -34,7 +34,7 @@ export class ThermobeaconWs08Accessory {
       )
       .setCharacteristic(
         this.platform.Characteristic.Model,
-        "ThermoBeacon ws08"
+        "ThermoBeacon oria"
       )
       .setCharacteristic(
         this.platform.Characteristic.SerialNumber,
@@ -75,7 +75,7 @@ export class ThermobeaconWs08Accessory {
   }
 
   async _update() {
-    let result: ThermoBeaconWs08Reading;
+    let result: ThermoBeaconOriaReading;
 
     try {
       result = await read(this.accessory.context.macAddress);

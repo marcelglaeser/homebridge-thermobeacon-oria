@@ -1,6 +1,6 @@
 import noble from "@abandonware/noble";
 
-export type ThermoBeaconWs08Reading = {
+export type ThermoBeaconOriaReading = {
   temperature?: number;
   humidity?: number;
   battery?: number;
@@ -60,13 +60,13 @@ async function stopScanning() {
   }
 }
 
-export async function read(macAddr: string): Promise<ThermoBeaconWs08Reading> {
+export async function read(macAddr: string): Promise<ThermoBeaconOriaReading> {
   await startScanning();
 
   return new Promise((_resolve) => {
     const timer = setTimeout(resolve, SCAN_TIMEOUT);
 
-    async function resolve(data: ThermoBeaconWs08Reading = {}) {
+    async function resolve(data: ThermoBeaconOriaReading = {}) {
       clearTimeout(timer);
       callbacks.delete(macAddr.toUpperCase());
       await stopScanning();

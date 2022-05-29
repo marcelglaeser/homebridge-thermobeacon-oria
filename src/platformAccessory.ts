@@ -79,6 +79,8 @@ export class ThermobeaconOriaAccessory {
 
     try {
       result = await read(this.accessory.context.macAddress);
+
+      this.platform.log.debug(result as string);
     } catch (error) {
       this.platform.log.debug(error as string);
       return;
